@@ -18,16 +18,15 @@ namespace GameAssignment.Controllers
     {
         private DatabaseContext db = new DatabaseContext();
 
-        //GET: api/default
-        //[HttpGet]
-        //[Route("api/default/")]
+        [HttpGet]
+        [Route("api/default/")]
         public IQueryable<Game> GetGames()
         {
             return db.Games;
         }
 
-       // GET: api/default/getgame/5
-        [ResponseType(typeof(Game))]
+        [HttpGet]
+        [Route("api/default/{id}")]
         public IHttpActionResult GetGame(int id)
         {
             Game game = db.Games.Find(id);
@@ -39,56 +38,8 @@ namespace GameAssignment.Controllers
             return Ok(game);
         }
 
-        //[HttpGet]
-        //[Route("api/default/{id}")]
-        //public IHttpActionResult GetGame(int id)
-        //{
-        //    Game game = db.Games.Find(id);
-        //    if (game == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(game);
-        //}
-
-        // PUT: api/default/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutGame(int id, Game game)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != game.GameId)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(game).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!GameExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        // PUT: api/default/5
-        [ResponseType(typeof(void))]
+        [HttpPut]
+        [Route("api/default/")]
         public IHttpActionResult PutGame(int id, Game game)
         {
             if (!ModelState.IsValid)
@@ -123,10 +74,8 @@ namespace GameAssignment.Controllers
         }
         
 
-        // POST: api/default
-       [ResponseType(typeof(Game))]
-        //[HttpPost]
-        //[Route("api/default")]
+        [HttpPost]
+        [Route("api/default")]
         public IHttpActionResult PostGame(Game game)
         {
             if (!ModelState.IsValid)
@@ -140,10 +89,8 @@ namespace GameAssignment.Controllers
             return CreatedAtRoute("DefaultApi", new { id = game.GameId }, game);
         }
 
-        // DELETE: api/default/5
-        [ResponseType(typeof(Game))]
-        //[HttpDelete]
-        //[Route(("api/default/{id}"))]
+        [HttpDelete]
+        [Route(("api/default/{id}"))]
         public IHttpActionResult DeleteGame(int id)
         {
             Game game = db.Games.Find(id);
